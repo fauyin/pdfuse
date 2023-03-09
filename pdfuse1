@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<?php
+require_once '../source/myprj.php';
+require_once '../source/wordpass.php';
+
+// 获取字符串ID，并进行安全处理
+$n1 = $_GET['id'];
+$n6 = un_ps($n1);
+
+// 检查输入参数是否合法
+if (!$n6) {
+    $title = '您的输入有误，请重试！';
+} else {
+    $title = $n6 . '户内施工质量验收记录';
+}
+
+// 检查文件是否存在
+$path0 = '../';
+$path1 = '../../';
+$path2 = '/data/1id/id';
+$path3 = '.pdf';
+
+$AllPath = $path1 . $myprj . $path2 . $n1 . $path3;
+$AllPath0 = $path0 . $myprj . $path2 . $n1 . $path3;
+$AllPathurl = $AllPath0;
+
+
+if (!$n6) {
+	echo '<html>
+<head>
+    <meta charset=/"UTF-8/">
+    <title>  $title  </title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+		h1 {
+        text-align: center;
+		}
+
+		p {
+			text-align: left;
+		}
+</style>
+</head>
+<body>
+<h1>您的输入有误，请重试！</h1></body></html>';
+  goto end;
+}
+
+
+if (file_exists($AllPath)) {
+	
+	$long = <<<EOT
+
+
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<title>PDFH5</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/pdfh5.css" />
+		<link href="https://www.gjtool.cn/download/pdfh5.png" type="image/x-icon" rel="shortcut icon" />
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			#demo {
+				display: none;
+				/* height: 33%; */
+			}
+
+			#demo2 {
+				/* display: none; */
+				height: 33%;
+			}
+
+			#demo3 {
+				/* display: none; */
+				height: 33%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="text-wrapper">
+				<div class="text part1">
+					<div>
+						<span class="letter">
+							<div class="character">L</div> <span></span>
+						</span>
+						<span class="letter">
+							<div class="character">o</div> <span></span>
+						</span>
+						<span class="letter">
+							<div class="character">a</div> <span></span>
+						</span>
+						<span class="letter">
+							<div class="character">d</div> <span></span>
+						</span>
+						<span class="letter">
+							<div class="character">i</div> <span></span>
+						</span>
+						<span class="letter">
+							<div class="character">n</div> <span></span>
+						</span>
+						<span class="letter">
+							<div class="character">g</div> <span></span>
+						</span>
+					</div>
+				</div>
+				<div class="how-to"><span>正在加载中，请您耐心等待...</span></div>
+			</div>
+
+		</div>
+		<div id="demo"></div>
+		<!-- 	<div id="demo2"></div>
+		<div id="demo3"></div> -->
+		<script src="js/pdf.js"></script>
+		<script src="js/pdf.worker.js"></script>
+		<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pdfh5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		
+		
+		<script type="text/javascript">
+		    var jsVar = '$AllPath';
+      			var pdfh5;
+			$(function() {
+				$("#app").remove()
+				$("#demo").show()
+				
+				pdfh5 = new Pdfh5('#demo', {
+					pdfurl: jsVar,
+					URIenable:true,
+					
+				});
+				
+			})
+		</script>
+	</body>
+
+</html>
+EOT;
+echo $long;
+
+} else {
+    echo '<html>
+<head>
+    <meta charset=/"UTF-8/">
+    <title><?php echo $title ?></title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+		h1 {
+        text-align: center;
+		}
+
+		p {
+			text-align: left;
+		}
+</style>
+</head>
+<body>
+<h1>文件未上传，请联系管理员！</h1><p>若您是管理员，请上传文件后重试！</p>
+</body></html>';
+}
+
+
+
+?>
+<?php
+end: ;
+?>
